@@ -34,5 +34,6 @@ The site will look responsive on the most common screen resolutions. The use of 
 - Import style rules and fonts from stylesheets
 - Figma
 - Git
+- Javascript
 
 ## [Check out the project on GitHubPages](https://freddymutant.github.io/russian-travel/)
