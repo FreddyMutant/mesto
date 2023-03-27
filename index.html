@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <script src="./scripts/script.js" defer></script>
+    <title>Проект "Место"</title>
+  </head>
+  <body class="root">
+    <!--Шапка сайта-->
+    <header class="header">
+    <a class="link" href="#" target="_blank">
+      <img
+        class="header__logo"
+        alt="Mesto Project"
+        src="./images/logo.svg"
+      />
+    </a>
+    </header>
+    <!--Основной контент-->
+    <main class="content">
+      <!--Секция Profile-->
+      <section class="profile">
+        <div class="profile__container">
+          <img
+          class="profile__avatar"
+          src="./images/Custo.jpg"
+          alt="Аватар профиля"
+          />
+          <div class="profile__info">
+            <div class="profile__name-box">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button class="profile__edit-button" type="button">
+                <img
+                class="profile__edit-image"
+                src="./images/edit-button.svg"
+                alt="Кнопка редактирования профиля"
+                />
+              </button>
+            </div>
+            <p class="profile__description">Исследователь океана</p>
+          </div>
+        </div>
+        <button class="profile__add-button" type="button">
+          <img
+            class="profile__add-image"
+            src="./images/add-button.svg"
+            alt="Кнопка добавления карточки"
+          />
+        </button>
+      </section>
+      <!--Секция Elements-->
+      <section class="elements">
+        <ul class="cards">
+          <li class="card">
+            <img
+                class="card__image"
+                src="./images/karachaevsk.jpg"
+                alt="Карачаевск"
+              />
+            <div class="card__description">
+              <h3 class="card__text">Карачаевск</h3>
+              <button class="card__like-button" type="button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img
+                class="card__image"
+                src="./images/elbrus.png"
+                alt="Гора Эльбрус"
+              />
+            <div class="card__description">
+              <h3 class="card__text">Гора Эльбрус</h3>
+              <button class="card__like-button" type="button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img
+                class="card__image"
+                src="./images/dombai.png"
+                alt="Домбай"
+              />
+            <div class="card__description">
+              <h3 class="card__text">Домбай</h3>
+              <button class="card__like-button" type="button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img
+                class="card__image"
+                src="./images/Altai.jpeg"
+                alt="Алтай"
+              />
+              <div class="card__description">
+                <h3 class="card__text">Алтай</h3>
+                <button class="card__like-button" type="button"></button>
+              </div>
+          </li>
+          <li class="card">
+            <img
+                class="card__image"
+                src="./images/baikal.jpg"
+                alt="Байкал"
+              />
+              <div class="card__description">
+                <h3 class="card__text">Байкал</h3>
+               <button class="card__like-button" type="button"></button>
+              </div>
+          </li>
+          <li class="card">
+            <img
+                class="card__image"
+                src="./images/petropavlovsk-kamchatskiy.jpg"
+                alt="Петропавловск-Камчатский"
+            />
+            <div class="card__description">
+              <h3 class="card__text">Петропавловск-Камчатский</h3>
+              <button class="card__like-button" type="button"></button>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <!--Подвал сайта-->
+    <footer class="footer">
+      <p class="footer__copyright">&copy;2023 Mesto Russia</p>
+    </footer>
+    <!--Попап редактирования профиля-->
+    <section class="popup">
+      <div class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="form" method="post" name="profileformedit">
+          <input class="form__input" type="text" name="username" required>
+          <input class="form__input" type="text" name="userdescription" required>
+          <button class="form__save-button" type="submit">Сохранить</button>
+        </form>
+        <button class="popup__close-button" type="button"></button>
+      </div>
+    </section>
+  </body>
+</html>
