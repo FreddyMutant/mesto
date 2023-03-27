@@ -13,19 +13,20 @@
 
 **Description**
 
-There will be a project about a trip through part of Russia.
-The site will look responsive on the most common screen resolutions. The use of grid technology will allow you to compactly and logically place all the content.
+There will be a project about a places of Russia presented by cards.
+The site will look responsive on the most common screen resolutions.
+You can edit profile or add new card of place. Like button will work aswell.
 
 **Resources**
 
-* [Link to layout in Figma](https://www.figma.com/file/5S2WSbEFL6awjVWJ0NWL8Q/Sprint-3_-Russia-_-desktop-mobile?node-id=28503%3A0)
+* [Link to layout in Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0-1)
 
 **Functionality**
 
 - organazing file structure according to BEM-methodology (Nested method),
 - flexbox-layouting, positioning elements,
-- working with embedded Youtube videos,
-- animating and transforming page elements with CSS
+- animating and transforming page elements with CSS,
+- added the ability to edit and add data with Javascript
 
 **Technologies used**
 
