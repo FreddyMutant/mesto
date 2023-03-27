@@ -37,4 +37,4 @@ You can edit profile or add new card of place. Like button will work aswell.
 - Git
 - Javascript
 
-## [Check out the project on GitHubPages](https://freddymutant.github.io/russian-travel/)
+## [Check out the project on GitHubPages](https://freddymutant.github.io/mesto/)
