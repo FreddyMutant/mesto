@@ -1,12 +1,13 @@
 // Выборка DOM элементов
 const popupElement = document.querySelector(".popup");
 const popupCloseButtonElement = popupElement.querySelector(".popup__close-button");
-const popupOpenButtonElement = document.querySelector(".profile__edit-button");
-const profileNameElement = document.querySelector(".profile__name");
-const profileDescriptionElement = document.querySelector(".profile__description");
-const formNameElement = document.querySelector(".form__input");
-const formDescriptionElement = document.querySelector(".form__input_description");
-const formSubmitButtonElement = document.querySelector(".form__save-button");
+const profileInfoElement = document.querySelector(".profile__info");
+const popupOpenButtonElement = profileInfoElement.querySelector(".profile__edit-button");
+const profileNameElement = profileInfoElement.querySelector(".profile__name");
+const profileDescriptionElement = profileInfoElement.querySelector(".profile__description");
+const formElement = popupElement.querySelector(".form");
+const formNameElement = formElement.querySelector(".form__input-name");
+const formDescriptionElement = formElement.querySelector(".form__input-description");
 
 
 // Функция открытия попапа
@@ -23,16 +24,7 @@ const closePopup = function (){
   popupElement.classList.remove("popup_opened");
 }
 
-// Функция закрытия попапа по клику вне формы
-
-const closePopupByClickOnOverlay = function (evt) {
-  console.log(evt.target, evt.currentTarget);
-  if (evt.target === evt.currentTarget) {
-    closePopup();
-  }
-}
-
-// Функция сабмита
+// Функция сабмита формы и ее закрытие
 
 const closePopupBySubmit = function (evt) {
   evt.preventDefault();
@@ -50,11 +42,7 @@ popupOpenButtonElement.addEventListener("click", openPopup);
 
 popupCloseButtonElement.addEventListener("click", closePopup);
 
-// Обработчик события по клику вне формы при закрытии попапа
-
-popupElement.addEventListener("click", closePopupByClickOnOverlay);
-
 // Обработчик события по сабмиту в форме
 
-formSubmitButtonElement.addEventListener("submit", closePopupBySubmit);
+formElement.addEventListener("submit", closePopupBySubmit);
 
