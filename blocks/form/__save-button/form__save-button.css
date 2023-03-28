@@ -20,9 +20,10 @@
 }
 
 @media (max-width: 767px) {
-  .btn-save {
+  .form__save-button {
     min-height: 46px;
     font-size: 14px;
     line-height: 1.22;
+    width: 238px;
   }
 }

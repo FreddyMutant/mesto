@@ -7,4 +7,15 @@
   font-size: 24px;
   line-height: 1.22;
   margin-bottom: 48px;
+  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  .form__title {
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 1.22;
+    margin-bottom: 75px;
+    width: 238px;
+}
 }
