@@ -6,8 +6,8 @@ const popupOpenButtonElement = profileInfoElement.querySelector(".profile__edit-
 const profileNameElement = profileInfoElement.querySelector(".profile__name");
 const profileDescriptionElement = profileInfoElement.querySelector(".profile__description");
 const formElement = popupElement.querySelector(".form");
-const formNameElement = formElement.querySelector(".form__input-name");
-const formDescriptionElement = formElement.querySelector(".form__input-description");
+const formNameElement = formElement.querySelector(".form__input_name");
+const formDescriptionElement = formElement.querySelector(".form__input_description");
 
 
 // Функция открытия попапа
