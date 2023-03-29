@@ -5,19 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./pages/index.css" />
-    <script src="./scripts/script.js" defer></script>
+    <script src="./scripts/index.js" defer></script>
     <title>Проект "Место"</title>
   </head>
   <body class="root">
     <!--Шапка сайта-->
     <header class="header">
-    <a class="link" href="#" target="_blank">
       <img
         class="header__logo"
         alt="Проект Место"
         src="./images/logo.svg"
       />
-    </a>
     </header>
     <!--Основной контент-->
     <main class="content">
@@ -32,7 +30,7 @@
           <div class="profile__info">
             <div class="profile__name-box">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <button class="profile__edit-button" type="button">
+              <button class="profile__edit-button" type="button" aria-label="Редактировать профиль">
                 <img
                 class="profile__edit-image"
                 src="./images/edit-button.svg"
@@ -62,7 +60,7 @@
               />
             <div class="card__description">
               <h3 class="card__text">Карачаевск</h3>
-              <button class="card__like-button" type="button"></button>
+              <button class="card__like-button" type="button" aria-label="Кнопка лайка"></button>
             </div>
           </li>
           <li class="card">
@@ -73,7 +71,7 @@
               />
             <div class="card__description">
               <h3 class="card__text">Гора Эльбрус</h3>
-              <button class="card__like-button" type="button"></button>
+              <button class="card__like-button" type="button" aria-label="Кнопка лайка"></button>
             </div>
           </li>
           <li class="card">
@@ -84,7 +82,7 @@
               />
             <div class="card__description">
               <h3 class="card__text">Домбай</h3>
-              <button class="card__like-button" type="button"></button>
+              <button class="card__like-button" type="button" aria-label="Кнопка лайка"></button>
             </div>
           </li>
           <li class="card">
@@ -95,7 +93,7 @@
               />
               <div class="card__description">
                 <h3 class="card__text">Алтай</h3>
-                <button class="card__like-button" type="button"></button>
+                <button class="card__like-button" type="button" aria-label="Кнопка лайка"></button>
               </div>
           </li>
           <li class="card">
@@ -106,7 +104,7 @@
               />
               <div class="card__description">
                 <h3 class="card__text">Байкал</h3>
-               <button class="card__like-button" type="button"></button>
+               <button class="card__like-button" type="button" aria-label="Кнопка лайка"></button>
               </div>
           </li>
           <li class="card">
@@ -117,7 +115,7 @@
             />
             <div class="card__description">
               <h3 class="card__text">Петропавловск-Камчатский</h3>
-              <button class="card__like-button" type="button"></button>
+              <button class="card__like-button" type="button" aria-label="Кнопка лайка"></button>
             </div>
           </li>
         </ul>
@@ -128,16 +126,16 @@
       <p class="footer__copyright">&copy;2023 Mesto Russia</p>
     </footer>
     <!--Попап редактирования профиля-->
-    <section class="popup">
+    <div class="popup">
       <div class="popup__container">
-        <form class="form" method="post" name="profileformedit">
-          <h2 class="form__title">Редактировать профиль</h2>
-          <input class="form__input form__input_name" type="text" placeholder="Name" name="username" required>
-          <input class="form__input form__input_description" type="text" placeholder="Description" name="userdescription" required>
-          <button class="form__save-button" type="submit">Сохранить</button>
+        <form class="popup__form" method="post" name="profileformedit">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input class="popup__input popup__input_type_name" type="text" placeholder="Имя" name="username" required>
+          <input class="popup__input popup__input_type_description" type="text" placeholder="Описание" name="userdescription" required>
+          <button class="popup__save-button" type="submit">Сохранить</button>
         </form>
         <button class="popup__close-button" type="button"></button>
       </div>
-    </section>
+    </div>
   </body>
 </html>

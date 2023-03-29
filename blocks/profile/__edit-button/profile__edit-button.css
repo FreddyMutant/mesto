@@ -2,9 +2,11 @@
   cursor: pointer;
   width: 24px;
   height: 24px;
-  background-color: #000;
+  background: #000;
   border: 1px solid #FFFFFF;
   align-self: center;
+  justify-content: center;
+  align-items: center;
   display: flex;
   justify-content: center;
   margin-left: 18px;
