@@ -22,8 +22,7 @@ const profileDescriptionElement = profileInfoElement.querySelector('.profile__de
 
 const imagePopupElement = document.querySelector('.image-popup');
 const imagePopupImageElement = document.querySelector('.image-popup__image');
-const imagePopupImageCaptionElement = document.querySelector('.image-popup__image-caption');
-const imagePopupContainerElement = document.querySelector('.image-popup__container');
+const imagePopupImageCaptionElement = document.querySelector('.image-popup__caption');
 
 const cardsElement = document.querySelector('.cards');
 const cardItem = document.querySelector('#cardElement').content;
