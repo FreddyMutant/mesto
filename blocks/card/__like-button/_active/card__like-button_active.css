@@ -1,0 +1,5 @@
+.card__like-button_active {
+  background: url(../../../../images/active-like-button.svg);
+  border: none;
+  cursor: pointer;
+}
