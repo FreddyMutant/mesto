@@ -15,7 +15,7 @@
 
 There will be a project about places of Russia presented by cards.
 Website will look responsive on the most common screen resolutions.
-You can edit profile or add new card of place. Like button will work aswell.
+You can edit your profile. Delete card or add new one. Like button will work aswell.
 
 **Resources**
 
