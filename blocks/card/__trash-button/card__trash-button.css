@@ -1,5 +1,5 @@
 .card__trash-button {
-  background-image: url(../../../images/Trash-button.svg);
+  background: url(../../../images/Trash-button.svg) no-repeat;
   background-color: initial;
   border: none;
   position: absolute;
