@@ -52,18 +52,18 @@ function closePopup (popupElement) {
 
 editProfilePopupButtonElement.addEventListener('click', () => {
   resetErrorInOpenForm(profileFormElement);
-  toggleButtonState(profileFormElementInputElements, profileFormElementSubmitButton, validationSet.disableButtonClass);
   editProfileNameElement.value = profileNameElement.textContent;
   editProfileDescriptionElement.value = profileDescriptionElement.textContent;
   openPopup(editProfilePopupElement);
+  toggleButtonState(profileFormElementInputElements, profileFormElementSubmitButton, validationSet.disableButtonClass);
 })
 
 // Функция открытия попапа добавления карточки
 
 addCardPopupOpenButtonElement.addEventListener('click', () => {
   resetErrorInOpenForm(addCardFormElement);
-  toggleButtonState(addCardFormElementInputElements, addCardFormElementSubmitButton, validationSet.disableButtonClass);
   openPopup(addCardPopupElement);
+  toggleButtonState(addCardFormElementInputElements, addCardFormElementSubmitButton, validationSet.disableButtonClass);
 })
 
 // Функция закрытия попапов на крестик
