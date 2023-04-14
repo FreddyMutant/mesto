@@ -27,51 +27,32 @@ const imagePopupImageCaptionElement = document.querySelector('.image-popup__capt
 const cardsElement = document.querySelector('.cards');
 const cardItem = document.querySelector('#cardElement').content;
 
+// Константы для сброса ошибки при открытии попапов
 
-// Массив карточек
+const profileFormElementInputElements = profileFormElement.querySelector('.profile__input');
+const profileFormElementSubmitButton = profileFormElement.querySelector('.profile__submit-button');
+const addCardFormElementInputElements = addCardFormElement.querySelector('.profile__input');
+const addCardFormElementSubmitButton = addCardFormElement.querySelector('.profile__submit-button');
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://images.unsplash.com/photo-1631563066841-e388591c418d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://images.unsplash.com/photo-1643268394372-8ffa62adec5a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1742&q=80'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://images.unsplash.com/photo-1634745186518-db2e653372c9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://images.unsplash.com/photo-1490879112094-281fea0883dc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1738&q=80'
-  }
-];
-
-// Общая функция открытия попапа
+// Общая функция открытия попапов
 
 function openPopup (popupElement) {
   popupElement.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEscape);
 }
 
 // Функция закрытия попапов
 
 function closePopup (popupElement) {
   popupElement.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEscape);
 }
 
 // Функция открытия попапа редактирования профиля
 
 editProfilePopupButtonElement.addEventListener('click', () => {
+  resetErrorInOpenForm(profileFormElement);
+  toggleButtonState(profileFormElementInputElements, profileFormElementSubmitButton, validationSet.disableButtonClass);
   editProfileNameElement.value = profileNameElement.textContent;
   editProfileDescriptionElement.value = profileDescriptionElement.textContent;
   openPopup(editProfilePopupElement);
@@ -80,10 +61,10 @@ editProfilePopupButtonElement.addEventListener('click', () => {
 // Функция открытия попапа добавления карточки
 
 addCardPopupOpenButtonElement.addEventListener('click', () => {
+  resetErrorInOpenForm(addCardFormElement);
+  toggleButtonState(addCardFormElementInputElements, addCardFormElementSubmitButton, validationSet.disableButtonClass);
   openPopup(addCardPopupElement);
 })
-
-// Функция открытия попапа изображения
 
 // Функция закрытия попапов на крестик
 
@@ -122,6 +103,15 @@ popupElements.forEach((popup) => {
   }
 })
 });
+
+// Функция закрытия попапа на Escape
+
+function closePopupByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened')
+    closePopup(popupOpened);
+  }
+}
 
 // Функция создания карточек
 
@@ -162,3 +152,6 @@ initialCards.forEach((element) => {
   cardsElement.append(card);
 })
 
+// Функция валидации
+
+enableValidation(validationSet);
