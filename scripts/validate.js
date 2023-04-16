@@ -13,9 +13,9 @@ const validationSet = {
 
 function enableValidation(set) {
   const forms = Array.from(set.inputForms);
-  forms.forEach((item) => {
-    const inputElements = item.querySelectorAll(set.inputSelector);
-    const submitButton = item.querySelector(set.submitButtonSelector);
+  forms.forEach((form) => {
+    const inputElements = form.querySelectorAll(set.inputSelector);
+    const submitButton = form.querySelector(set.submitButtonSelector);
     setEventListener(inputElements, submitButton, set.errorSelectorTemplate, set.disableButtonClass, set.inputErrorClass, set.textErrorClass);
   })
 }
@@ -57,13 +57,13 @@ function hideInputError(input, errorTextElement, inputErrorClass, textErrorClass
 // Функция изменения состояния кнопки при проверке валидации
 
 function toggleButtonState(inputElements, submitButton, disableButtonClass) {
-  validInput(inputElements) ? enableButton(submitButton, disableButtonClass) : disableButton(submitButton, disableButtonClass);
+  !validInput(inputElements) ? enableButton(submitButton, disableButtonClass) : disableButton(submitButton, disableButtonClass);
 }
 
 // Функция возвращения валидности инпутов
 
 function validInput(inputElements) {
-  return Array.from(inputElements).every((input) => input.validity.valid)
+  return Array.from(inputElements).some((input) => !input.validity.valid)
 }
 
 // Функция включения кнопки
@@ -82,12 +82,14 @@ function disableButton(submitButton, disableButtonClass) {
 
 // Функция сброса проверки валидации формы
 
-function resetErrorInOpenForm(form) {
-  form.querySelectorAll(validationSet.inputSelector).forEach((input) => {
-    const errorTextElement = form.querySelector(`${validationSet.errorSelectorTemplate}${input.name}`)
+function resetErrorInOpenForm(form, set) {
+  const submitButton = form.querySelector(set.submitButtonSelector);
+  form.querySelectorAll(set.inputSelector).forEach((input) => {
+    const errorTextElement = form.querySelector(`${set.errorSelectorTemplate}${input.name}`)
     if (!input.validity.valid) {
-      hideInputError(input, errorTextElement, validationSet.inputErrorClass, validationSet.textErrorClass);
+      hideInputError(input, errorTextElement, set.inputErrorClass);
     }
   });
+  disableButton(submitButton, set.disableButtonClass);
 }
 

@@ -29,9 +29,9 @@ const cardItem = document.querySelector('#cardElement').content;
 
 // Константы для сброса ошибки при открытии попапов
 
-const profileFormElementInputElements = profileFormElement.querySelector('.profile__input');
+const profileFormElementInputElements = profileFormElement.querySelectorAll('.profile__input');
 const profileFormElementSubmitButton = profileFormElement.querySelector('.profile__submit-button');
-const addCardFormElementInputElements = addCardFormElement.querySelector('.profile__input');
+const addCardFormElementInputElements = addCardFormElement.querySelectorAll('.profile__input');
 const addCardFormElementSubmitButton = addCardFormElement.querySelector('.profile__submit-button');
 
 // Общая функция открытия попапов
@@ -51,19 +51,19 @@ function closePopup (popupElement) {
 // Функция открытия попапа редактирования профиля
 
 editProfilePopupButtonElement.addEventListener('click', () => {
-  resetErrorInOpenForm(profileFormElement);
+  profileFormElement.reset();
+  resetErrorInOpenForm(profileFormElement, validationSet);
   editProfileNameElement.value = profileNameElement.textContent;
   editProfileDescriptionElement.value = profileDescriptionElement.textContent;
   openPopup(editProfilePopupElement);
-  toggleButtonState(profileFormElementInputElements, profileFormElementSubmitButton, validationSet.disableButtonClass);
 })
 
 // Функция открытия попапа добавления карточки
 
 addCardPopupOpenButtonElement.addEventListener('click', () => {
-  resetErrorInOpenForm(addCardFormElement);
+  addCardFormElement.reset();
+  resetErrorInOpenForm(addCardFormElement, validationSet);
   openPopup(addCardPopupElement);
-  toggleButtonState(addCardFormElementInputElements, addCardFormElementSubmitButton, validationSet.disableButtonClass);
 })
 
 // Функция закрытия попапов на крестик
