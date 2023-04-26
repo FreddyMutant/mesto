@@ -24,6 +24,8 @@ const imagePopupElement = document.querySelector('.image-popup');
 const imagePopupImageElement = document.querySelector('.image-popup__image');
 const imagePopupImageCaptionElement = document.querySelector('.image-popup__caption');
 
+const avatarElement = document.querySelector('.profile__avatar');
+
 const cardsElement = document.querySelector('.cards');
 const cardItem = document.querySelector('#cardElement').content;
 
@@ -125,25 +127,40 @@ function addCard (item) {
   cardImageElement.alt = item.name
   cardElement.querySelector('.card__text').textContent = item.name;
 
-  // Функция активации лайка
+  // Активация лайка
 
   likeButtonCardElement.addEventListener('click', (evt) => evt.target.classList.toggle('card__like-button_active'));
 
-  // Функция удаления карточки
+  // Удаление карточки
 
   trashButtonCardElement.addEventListener('click', (evt) => evt.target.closest('.card').remove());
 
-  // Функция увеличения изображения карточки
+  // Увеличение изображения карточки
 
   cardImageElement.addEventListener('click', () => {
-    imagePopupImageElement.src = item.link;
-    imagePopupImageElement.alt = item.name;
-    imagePopupImageCaptionElement.textContent = item.name;
+    openImagePopup(item);
     openPopup(imagePopupElement);
   })
 
   return cardElement
 }
+
+// Функция увеличения картинки
+
+function openImagePopup(item) {
+  imagePopupImageElement.src = item.link;
+  imagePopupImageElement.alt = item.name;
+  imagePopupImageCaptionElement.textContent = item.name;
+  openPopup(imagePopupElement);
+}
+
+// Увеличение картинки на аватарке
+
+avatarElement.addEventListener('click', () => {
+  const avatarItem = {name: avatarElement.alt, link: avatarElement.src}
+  openImagePopup(avatarItem);
+  openPopup(imagePopupElement);
+})
 
 // Добавление в разметку карточек из массива
 
