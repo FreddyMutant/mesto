@@ -34,7 +34,7 @@ export default class Card {
 
  // Метод навешивания слушателей
 
- _setEventListener(){
+ _setEventListenerMethod(){
    this._likeButtonCardElement.addEventListener('click', this._likeButtonStateMethod);
    this._trashButtonCardElement.addEventListener('click', this._deleteCardMethod);
    this._cardImageElement.addEventListener('click', this._openImagePopupMethod)
@@ -42,11 +42,11 @@ export default class Card {
 
  // Функция-метод наполненния контентом карточки
 
- createCard() {
+ createCardMethod() {
    this._cardImageElement.src = this._link;
    this._cardImageElement.alt = this._name;
    this._cardCaptionElement.textContent = this._name;
-   this._setEventListener();
+   this._setEventListenerMethod();
    return this._cardElement
  }
  }

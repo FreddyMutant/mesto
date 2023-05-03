@@ -80,7 +80,7 @@ function closePopupByEscape(evt) {
 
 function createNewCard (element) {
   const card = new Card (element, templateSelector, openImagePopup);
-  return card.createCard();
+  return card.createCardMethod();
 }
 
 // Функция увеличения картинки
