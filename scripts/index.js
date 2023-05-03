@@ -1,3 +1,7 @@
+import cardsContent from './array.js';
+import Card from './card.js';
+import FormValidator from './formValidator.js';
+
 // Выборка DOM элементов
 const popupElements = document.querySelectorAll('.popup');
 
@@ -27,14 +31,17 @@ const imagePopupImageCaptionElement = document.querySelector('.image-popup__capt
 const avatarElement = document.querySelector('.profile__avatar');
 
 const cardsElement = document.querySelector('.cards');
-const cardItem = document.querySelector('#cardElement').content;
+const templateSelector = '#cardsElement';
 
-// Константы для сброса ошибки при открытии попапов
-
-const profileFormElementInputElements = profileFormElement.querySelectorAll('.profile__input');
-const profileFormElementSubmitButton = profileFormElement.querySelector('.profile__submit-button');
-const addCardFormElementInputElements = addCardFormElement.querySelectorAll('.profile__input');
-const addCardFormElementSubmitButton = addCardFormElement.querySelector('.profile__submit-button');
+// Объект для валидации
+const validationSet = {
+  inputSelector: '.popup__input',
+  errorSelectorTemplate: '.popup__error_type_',
+  submitButtonSelector: '.popup__submit-button',
+  disableButtonClass: 'popup__submit-button_disable',
+  inputErrorClass: 'popup__input_invalid',
+  textErrorClass: 'popup__error_visible'
+};
 
 // Общая функция открытия попапов
 
@@ -49,52 +56,6 @@ function closePopup (popupElement) {
   popupElement.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByEscape);
 }
-
-// Функция открытия попапа редактирования профиля
-
-editProfilePopupButtonElement.addEventListener('click', () => {
-  profileFormElement.reset();
-  resetErrorInOpenForm(profileFormElement, validationSet);
-  editProfileNameElement.value = profileNameElement.textContent;
-  editProfileDescriptionElement.value = profileDescriptionElement.textContent;
-  openPopup(editProfilePopupElement);
-})
-
-// Функция открытия попапа добавления карточки
-
-addCardPopupOpenButtonElement.addEventListener('click', () => {
-  addCardFormElement.reset();
-  resetErrorInOpenForm(addCardFormElement, validationSet);
-  openPopup(addCardPopupElement);
-})
-
-// Функция закрытия попапов на крестик
-
-popupCloseButtonElements.forEach((element) => {
-  const popup = element.closest('.popup');
-  element.addEventListener('click', () => {
-    closePopup(popup);
-  })
-})
-
-// Функция сабмита формы редактирования профиля и ее закрытие
-
-profileFormElement.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  profileNameElement.textContent = editProfileNameElement.value;
-  profileDescriptionElement.textContent = editProfileDescriptionElement.value;
-  closePopup(editProfilePopupElement);
-})
-
-// Функция сабмита формы добавления карточки и ее закрытие
-
-addCardFormElement.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  const cardNameUrl = {name: addCardTitleElement.value, link: addCardUrlElement.value};
-  cardsElement.prepend(addCard(cardNameUrl));
-  closePopup(addCardPopupElement);
-  evt.target.reset();
-})
 
 // Функция закрытия попапа по клику вне формы
 
@@ -117,32 +78,9 @@ function closePopupByEscape(evt) {
 
 // Функция создания карточек
 
-function addCard (item) {
-  const cardElement = cardItem.querySelector('.card').cloneNode(true);
-  const cardImageElement = cardElement.querySelector('.card__image');
-  const likeButtonCardElement = cardElement.querySelector('.card__like-button');
-  const trashButtonCardElement = cardElement.querySelector('.card__trash-button');
-
-  cardImageElement.src = item.link
-  cardImageElement.alt = item.name
-  cardElement.querySelector('.card__text').textContent = item.name;
-
-  // Активация лайка
-
-  likeButtonCardElement.addEventListener('click', (evt) => evt.target.classList.toggle('card__like-button_active'));
-
-  // Удаление карточки
-
-  trashButtonCardElement.addEventListener('click', (evt) => evt.target.closest('.card').remove());
-
-  // Увеличение изображения карточки
-
-  cardImageElement.addEventListener('click', () => {
-    openImagePopup(item);
-    openPopup(imagePopupElement);
-  })
-
-  return cardElement
+function createNewCard (element) {
+  const card = new Card (element, templateSelector, openImagePopup);
+  return card.createCard();
 }
 
 // Функция увеличения картинки
@@ -162,13 +100,71 @@ avatarElement.addEventListener('click', () => {
   openPopup(imagePopupElement);
 })
 
+// Функция создания контейнера карточки в нужном месте
+
+function addCard(cardContainer, card) {
+  cardContainer.prepend(card);
+}
+
 // Добавление в разметку карточек из массива
 
-initialCards.forEach((element) => {
-  const card = addCard(element);
-  cardsElement.append(card);
+cardsContent.forEach((element) => {
+  addCard(cardsElement, createNewCard(element));
 })
 
-// Функция валидации
+// Экземпляр валидатора форм и его активация
 
-enableValidation(validationSet);
+const forms = {};
+
+Array.from(document.forms).forEach((item) => {
+  const form = new FormValidator(validationSet, item);
+  const formName = item.name;
+  forms[formName] = form;
+  form.enableValidationMethod();
+})
+
+// Функция открытия попапа редактирования профиля
+
+editProfilePopupButtonElement.addEventListener('click', () => {
+  profileFormElement.reset();
+  forms.profileformedit.resetErrorInOpenFormMethod();
+  editProfileNameElement.value = profileNameElement.textContent;
+  editProfileDescriptionElement.value = profileDescriptionElement.textContent;
+  openPopup(editProfilePopupElement);
+})
+
+// Функция открытия попапа добавления карточки
+
+addCardPopupOpenButtonElement.addEventListener('click', () => {
+  addCardFormElement.reset();
+  forms.addform.resetErrorInOpenFormMethod();
+  openPopup(addCardPopupElement);
+})
+
+// Функция закрытия попапов на крестик
+
+popupCloseButtonElements.forEach((element) => {
+  const popup = element.closest('.popup');
+  element.addEventListener('click', () => {
+    closePopup(popup);
+  })
+})
+
+// Функция сабмита формы редактирования профиля и ее закрытие
+
+profileFormElement.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  profileNameElement.textContent = editProfileNameElement.value;
+  profileDescriptionElement.textContent = editProfileDescriptionElement.value;
+  closePopup(editProfilePopupElement);
+})
+
+// Cабмит формы добавления карточки и ее закрытие
+
+addCardFormElement.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  const cardNameUrl = {name: addCardTitleElement.value, link: addCardUrlElement.value};
+  addCard(cardsElement, createNewCard(cardNameUrl));
+  closePopup(addCardPopupElement);
+  evt.target.reset();
+})
