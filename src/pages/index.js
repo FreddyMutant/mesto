@@ -3,7 +3,7 @@ import FormValidator from '../components/FormValidator.js';
 import ImagePopup from '../components/ImagePopup.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
-import PopupWithForm from '../components/formPopup.js';
+import PopupWithForm from '../components/PopupWithForm';
 import {
   initialCards, addCardPopupOpenButtonElement, editProfilePopupButtonElement, templateSelector, imagePopupSelector, profilePopupSelector, addCardPopupSelector, cardsElementSelector, formsValidator, profileInfo, validationSet
 } from '../utils/constants.js';
