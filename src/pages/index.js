@@ -1,6 +1,6 @@
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
-import ImagePopup from '../components/ImagePopup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithForm from '../components/PopupWithForm';
@@ -15,7 +15,7 @@ const userInfo = new UserInfo(profileInfo);
 
 // Экземпляр для попапа изображения
 
-const popupImage = new ImagePopup(imagePopupSelector);
+const popupImage = new PopupWithImage(imagePopupSelector);
 
 // Экземпляр для попапа профиля
 
