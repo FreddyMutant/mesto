@@ -3,7 +3,7 @@
 export default class Card {
   constructor (item, templateSelector, openImagePopup) {
    this._item = item;
-   this._name = item.name;
+   this._name = item.title;
    this._link = item.link;
    this._templateSelector = templateSelector;
    this._openImagePopup = openImagePopup;
@@ -44,7 +44,7 @@ export default class Card {
 
  createCardMethod() {
    this._cardImageElement.src = this._link;
-   this._cardImageElement.alt = this._name;
+   this._cardImageElement.alt = `Изображение ${this._name}`;
    this._cardCaptionElement.textContent = this._name;
    this._setEventListenerMethod();
    return this._cardElement
