@@ -1,12 +1,12 @@
-import Card from '../scripts/components/card.js';
-import FormValidator from '../scripts/components/formValidator.js';
-import ImagePopup from '../scripts/components/imagePopup.js';
-import Section from '../scripts/components/section.js';
-import UserInfo from '../scripts/components/userInfo.js';
-import formPopup from '../scripts/components/formPopup.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import ImagePopup from '../components/ImagePopup.js';
+import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithForm from '../components/formPopup.js';
 import {
   initialCards, addCardPopupOpenButtonElement, editProfilePopupButtonElement, templateSelector, imagePopupSelector, profilePopupSelector, addCardPopupSelector, cardsElementSelector, formsValidator, profileInfo, validationSet
-} from '../scripts/utils/constants.js';
+} from '../utils/constants.js';
 import './index.css';
 
 // Экземпляр для данных в попапе профиля
@@ -19,13 +19,13 @@ const popupImage = new ImagePopup(imagePopupSelector);
 
 // Экземпляр для попапа профиля
 
-const profilePopup = new formPopup(profilePopupSelector, (data) => {
+const profilePopup = new PopupWithForm(profilePopupSelector, (data) => {
   userInfo.setUserInfo(data);
 });
 
 // Экземпляр для попапа добавления карточки
 
-const addCardPopup = new formPopup(addCardPopupSelector, (data) => {
+const addCardPopup = new PopupWithForm(addCardPopupSelector, (data) => {
   section.addItemMethod(data);
 });
 
