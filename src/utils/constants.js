@@ -27,6 +27,8 @@ const initialCards = [
   }
 ];
 
+// Селекторы элементов
+
 const addCardPopupOpenButtonElement = document.querySelector('.profile__add-button');
 const editProfilePopupButtonElement = document.querySelector('.profile__edit-button');
 
@@ -35,8 +37,15 @@ const templateSelector = '#cardsElement';
 const imagePopupSelector = '.image-popup';
 const profilePopupSelector = '.edit-profile-popup';
 const addCardPopupSelector = '.add-card-popup';
+const editAvatarPopupSelector = '.edit-avatar-popup';
+const popupDeleteCardSelector = '.delete-popup';
+
+const editAvatarElementSelector = '.profile__avatar-edit-button';
+const avatarImageElementSelector = '.profile__avatar';
 
 const cardsElementSelector = '.cards';
+
+// Объект для хранения всех экземпляров валидации
 
 const formsValidator = {};
 
@@ -44,7 +53,8 @@ const formsValidator = {};
 
 const profileInfo = {
   profileNameSelector: '.profile__name',
-  profileDescriptionSelector: '.profile__description'
+  profileDescriptionSelector: '.profile__description',
+  profileAvatarSelector: '.profile__avatar'
 }
 
 // Объект для валидации
@@ -59,5 +69,5 @@ const validationSet = {
 };
 
 export {
-  initialCards, addCardPopupOpenButtonElement, editProfilePopupButtonElement, templateSelector, imagePopupSelector, profilePopupSelector, addCardPopupSelector, cardsElementSelector, formsValidator, profileInfo, validationSet
+  initialCards, addCardPopupOpenButtonElement, editProfilePopupButtonElement, templateSelector, imagePopupSelector, profilePopupSelector, addCardPopupSelector, editAvatarPopupSelector, popupDeleteCardSelector, editAvatarElementSelector, avatarImageElementSelector, cardsElementSelector, formsValidator, profileInfo, validationSet
 };

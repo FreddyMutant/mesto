@@ -45,7 +45,7 @@ export default class FormValidator {
 
 // Метод проверки инпутов
 
-_validInputMethod() {
+  _validInputMethod() {
   return Array.from(this._inputElements).some((input) => !input.validity.valid)
 }
 

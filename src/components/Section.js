@@ -1,23 +1,30 @@
 // Класс Section
 
 export default class Section {
-  constructor({ array, renderer }, containerSelector) {
+  constructor(renderer, containerSelector) {
     this._container = document.querySelector(containerSelector);
-    this._cardsContent = array;
     this._renderer = renderer;
   }
 
   // Метод добавления карточки из массива
 
-  addCardFromArrayMethod() {
-    this._cardsContent.forEach((element) => {
-      this.addItemMethod(element);
+  addCardFromArrayMethod(array) {
+    array.forEach((element) => {
+      this._renderer(element);
     });
   }
 
-  // Метод добавления карточки в контейнер в нужном месте
+  // Метод добавления карточки в контейнер в конце
 
-  addItemMethod(data) {
-    this._container.prepend(this._renderer(data));
+  addItemPrependMethod(domElement) {
+    this._container.prepend(domElement);
   }
+
+    // Метод добавления карточки в контейнер в начале
+
+  addItemAppendMethod(domElement) {
+    this._container.append(domElement);
+  }
+
 }
+
