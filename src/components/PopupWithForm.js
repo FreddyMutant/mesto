@@ -8,6 +8,8 @@ export default class PopupWithForm extends Popup {
     this._submitFunction = submitFunction;
     this._form = this._popup.querySelector('.popup__form');
     this._inputSelector = this._form.querySelectorAll('.popup__input');
+    this._submitButton = this._form.querySelector('.popup__submit-button');
+    this._defaultButtonText = this._submitButton.textContent;
   }
 
 // Метод получения значения инпутов
@@ -34,8 +36,15 @@ export default class PopupWithForm extends Popup {
     super.setEventListenerMethod();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
+      this._submitButton.textContent = `${this._submitButton.textContent}...`
       this._submitFunction(this._getInputValueMethod());
     });
+  }
+
+// Метод изменения текста кнопки во время сабмита
+
+  defaultButtonTextMethod() {
+    this._submitButton.textContent = this._defaultButtonText;
   }
 
 // Метод закрытия попапа перезаписанный

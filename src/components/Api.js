@@ -74,7 +74,7 @@ export default class Api {
 
 // Метод добавления лайка
 
-  addLikeMethod(data) {
+  addLikeMethod(cardId) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
     method: 'PUT',
     headers: {
@@ -87,8 +87,8 @@ export default class Api {
 
 // Метод снятия лайка
 
-  removeLikeMethod(data) {
-    return fetch(`${this._url}/cards`, {
+  removeLikeMethod(cardId) {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: 'DELETE',
       headers: {
         authorization: this._authorization
@@ -96,4 +96,17 @@ export default class Api {
     })
       .them(this._checkResponseMethod)
   }
+
+// Метод удаления карточки
+
+  deleteCardMethod(cardId) {
+    return fetch(`${this._url}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authorization
+      }
+    })
+    .them(this._checkResponseMethod)
+  }
+
 }

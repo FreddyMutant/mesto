@@ -10,7 +10,6 @@ import {
   initialCards, addCardPopupOpenButtonElement, editProfilePopupButtonElement, templateSelector, imagePopupSelector, profilePopupSelector, addCardPopupSelector, editAvatarPopupSelector, popupDeleteCardSelector, editAvatarElementSelector, avatarImageElementSelector, cardsElementSelector, formsValidator, profileInfo, validationSet
 } from '../utils/constants.js';
 import './index.css';
-import { data } from 'autoprefixer';
 
 // Экземпляр для Api
 
@@ -33,9 +32,14 @@ const popupImage = new PopupWithImage(imagePopupSelector);
 
 // Экземпляр для попапа редактирования данных профиля
 
-const popupDeleteCard = new PopupWithDeleteCardForm(popupDeleteCardSelector, (element) => {
-  element.removeCardMethod();
-  popupDeleteCard.closePopupMethod();
+const popupDeleteCard = new PopupWithDeleteCardForm(popupDeleteCardSelector, ({ card, cardId}) => {
+  api.deleteCardMethod(cardId)
+    .then(() => {
+      card.removeCardMethod()
+      popupDeleteCard.closePopupMethod()
+    })
+    .catch((error) => console.error(`Ошибка удаления карточки ${error}`))
+    .finally(() => popupDeleteCard.deleteButtonTextMethod())
 });
 
 // Функция создания экземпляра карточки
@@ -65,9 +69,10 @@ const editAvatarPopup = new PopupWithForm(editAvatarPopupSelector, (data) => {
   api.setNewAvatarMethod(data)
     .then(res => {
       userInfo.setUserInfoMethod({ username: res.name, userdescription: res.about, avatar: res.avatar })
+      editAvatarPopup.closePopupMethod();
     })
     .catch((error) => console.error(`Ошибка обновления аватарки ${error}`))
-    .finally()
+    .finally(() => editAvatarPopup.defaultButtonTextMethod())
 });
 
 // Экземпляр для попапа редактирования данных профиля
@@ -76,10 +81,10 @@ const profilePopup = new PopupWithForm(profilePopupSelector, (data) => {
   api.setUserinfoMethod(data)
     .then(res => {
       userInfo.setUserInfoMethod({ username: res.name, userdescription: res.about, avatar: res.avatar })
+      profilePopup.closePopupMethod();
     })
     .catch((error) => console.error(`Ошибка редактирования данных профиля ${error}`))
-    .finally();
-  profilePopup.closePopupMethod();
+    .finally(() => profilePopup.defaultButtonTextMethod())
 });
 
 // Экземпляр для попапа добавления карточки
@@ -92,7 +97,7 @@ const addCardPopup = new PopupWithForm(addCardPopupSelector, (data) => {
       addCardPopup.closePopupMethod()
     })
     .catch((error) => console.error(`Ошибка создания новой карточки ${error}`))
-    .finally()
+    .finally(() => addCardPopup.defaultButtonTextMethod())
 });
 
 // Экземпляр контейнера c карточкой

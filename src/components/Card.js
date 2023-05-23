@@ -2,7 +2,6 @@
 
 export default class Card {
   constructor (item, templateSelector, openImagePopup, openPopupDeleteCard, changeLike) {
-    this._item = item;
     this._name = item.name;
     this._link = item.link;
     this._myId = item.myId;
@@ -19,7 +18,7 @@ export default class Card {
  //Метод открытия попапа удаления карточки
 
  _popupDeleteCardMethod = () => {
-    this._openPopupDeleteCard(this);
+    this._openPopupDeleteCard({ card: this, cardId: this._cardId });
  }
 
  //Метод изменения состояния лайка
@@ -31,7 +30,7 @@ export default class Card {
  //Метод увеличения картинки карточки
 
  _openImagePopupMethod = () => {
-    this._openImagePopup(this._item);
+    this._openImagePopup({ title: this._name, link: this._link });
  }
 
  // Метод навешивания слушателей
