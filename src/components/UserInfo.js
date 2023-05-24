@@ -10,14 +10,14 @@ export default class UserInfo {
 // Метод возвращения данных профиля
 
   getUserInfoMethod() {
-    return {username: this._profileName.textContent, userdescription: this._profileDescription.textContent}
+    return {username: this._profileName.textContent, job: this._profileDescription.textContent}
   }
 
 // Метод заполнения данных профиля
 
-  setUserInfoMethod({username, userdescription, avatar}) {
-    this._profileAvatarSelector.src = avatar;
+  setUserInfoMethod({avatar, username, job}) {
+    this._profileAvatar.src = avatar;
     this._profileName.textContent = username;
-    this._profileDescription.textContent = userdescription;
+    this._profileDescription.textContent = job;
   }
 }

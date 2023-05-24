@@ -17,7 +17,7 @@ export default class PopupWithDeleteCardForm extends Popup {
     super.setEventListenerMethod();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._submitButton.textContent = `${this._submitButton.textContent}...`
+      this._submitButton.textContent = `Удаление...`
       this._submitFunction({ card: this._element, cardId: this._cardId });
     });
   }
@@ -30,9 +30,10 @@ export default class PopupWithDeleteCardForm extends Popup {
 
 // Метод обработчика клика по мусорке
 
-  openPopupMethod = ({ element, cardId }) => {
+  openPopupMethod = ({ card, cardId }) => {
     super.openPopupMethod();
-    this._element = element;
+    this._element = card;
     this._cardId = cardId;
+    console.log(this._element)
   }
 }

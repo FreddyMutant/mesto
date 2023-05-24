@@ -7,7 +7,7 @@ import PopupWithForm from '../components/PopupWithForm';
 import PopupWithDeleteCardForm from '../components/PopupWithDeleteCardForm.js';
 import Api from '../components/Api.js';
 import {
-  initialCards, addCardPopupOpenButtonElement, editProfilePopupButtonElement, templateSelector, imagePopupSelector, profilePopupSelector, addCardPopupSelector, editAvatarPopupSelector, popupDeleteCardSelector, editAvatarElementSelector, avatarImageElementSelector, cardsElementSelector, formsValidator, profileInfo, validationSet
+  addCardPopupOpenButtonElement, editProfilePopupButtonElement, templateSelector, imagePopupSelector, profilePopupSelector, addCardPopupSelector, editAvatarPopupSelector, popupDeleteCardSelector, editAvatarElementSelector, cardsElementSelector, formsValidator, profileInfo, validationSet
 } from '../utils/constants.js';
 import './index.css';
 
@@ -25,6 +25,12 @@ const api = new Api({
 // Экземпляр для данных в попапе профиля
 
 const userInfo = new UserInfo(profileInfo);
+
+// Экземпляр контейнера c карточкой
+
+const section = new Section ((element) => {
+  section.addItemAppendMethod(createNewCard(element))
+  }, cardsElementSelector)
 
 // Экземпляр для попапа изображения
 
@@ -45,7 +51,7 @@ const popupDeleteCard = new PopupWithDeleteCardForm(popupDeleteCardSelector, ({ 
 // Функция создания экземпляра карточки
 
 function createNewCard (element) {
-  const card = new Card (element, templateSelector, popupImage.openImagePopup, popupDeleteCard.openPopupMethod, (likeButtonCardElement, cardId) => {
+  const card = new Card (element, templateSelector,  popupImage.openImagePopup, popupDeleteCard.openPopupMethod, (likeButtonCardElement, cardId) => {
     if (likeButtonCardElement.classList.contains('card__like-button_active')) {
       api.removeLikeMethod(cardId)
         .then(res => {
@@ -68,8 +74,8 @@ function createNewCard (element) {
 const editAvatarPopup = new PopupWithForm(editAvatarPopupSelector, (data) => {
   api.setNewAvatarMethod(data)
     .then(res => {
-      userInfo.setUserInfoMethod({ username: res.name, userdescription: res.about, avatar: res.avatar })
-      editAvatarPopup.closePopupMethod();
+      userInfo.setUserInfoMethod({ username: res.name, job: res.about, avatar: res.avatar })
+      editAvatarPopup.closePopupMethod()
     })
     .catch((error) => console.error(`Ошибка обновления аватарки ${error}`))
     .finally(() => editAvatarPopup.defaultButtonTextMethod())
@@ -80,8 +86,8 @@ const editAvatarPopup = new PopupWithForm(editAvatarPopupSelector, (data) => {
 const profilePopup = new PopupWithForm(profilePopupSelector, (data) => {
   api.setUserinfoMethod(data)
     .then(res => {
-      userInfo.setUserInfoMethod({ username: res.name, userdescription: res.about, avatar: res.avatar })
-      profilePopup.closePopupMethod();
+      userInfo.setUserInfoMethod({ username: res.name, job: res.about, avatar: res.avatar })
+      profilePopup.closePopupMethod()
     })
     .catch((error) => console.error(`Ошибка редактирования данных профиля ${error}`))
     .finally(() => profilePopup.defaultButtonTextMethod())
@@ -99,12 +105,6 @@ const addCardPopup = new PopupWithForm(addCardPopupSelector, (data) => {
     .catch((error) => console.error(`Ошибка создания новой карточки ${error}`))
     .finally(() => addCardPopup.defaultButtonTextMethod())
 });
-
-// Экземпляр контейнера c карточкой
-
-const section = new Section ((element) => {
-  section.addItemAppendMethod(createNewCard(element))
-  }, cardsElementSelector)
 
 // Экземпляр валидатора форм и его активация
 
@@ -150,7 +150,8 @@ editAvatarElementSelector.addEventListener('click', () => {
 Promise.all([api.getInfoMethod(), api.getCardMethod()])
   .then(([dataUser, dataCard]) => {
     dataCard.forEach(element => element.myId = dataUser._id)
-    userInfo.setUserInfoMethod({ username: dataUser.name, userdescription: dataUser.about, avatar: dataUser.avatar });
-    section.addCardFromArrayMethod(dataCard);
+    userInfo.setUserInfoMethod({ username: dataUser.name, job: dataUser.about, avatar: dataUser.avatar });
+    section.addCardFromArrayMethod(dataCard)
   })
   .catch((error) => console.error(`Ошибка создания начальных данных ${error}`))
+

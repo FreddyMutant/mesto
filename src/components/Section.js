@@ -8,8 +8,8 @@ export default class Section {
 
   // Метод добавления карточки из массива
 
-  addCardFromArrayMethod(array) {
-    array.forEach((element) => {
+  addCardFromArrayMethod(dataCard) {
+    dataCard.forEach((element) => {
       this._renderer(element);
     });
   }

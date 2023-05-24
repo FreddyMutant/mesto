@@ -1,5 +1,5 @@
 export default class Api {
-  constructor(options, ) {
+  constructor(options) {
     this._url = options.baseUrl;
     this._headers = options.headers;
     this._authorization = options.headers.authorization;
@@ -9,7 +9,7 @@ export default class Api {
 
   _checkResponseMethod(res) {return res.ok ? res.json() : Promise.reject}
 
-// Метод получения данных профиля
+// Метод получения данных пользователя
 
   getInfoMethod() {
     return fetch(`${this._url}/users/me`, {
@@ -17,7 +17,7 @@ export default class Api {
         authorization: this._authorization
       }
     })
-      .then(this._checkResponse)
+      .then(this._checkResponseMethod)
   }
 
 // Метод получения данных карточки
@@ -39,10 +39,10 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify({
         name: data.username,
-        about: data.userdescription
+        about: data.job
       })
     })
-      .them(this._checkResponseMethod)
+      .then(this._checkResponseMethod)
   }
 
 // Метод добавления данных аватарки
@@ -55,21 +55,22 @@ export default class Api {
         avatar: data.avatar
       })
     })
-      .them(this._checkResponseMethod)
+      .then(this._checkResponseMethod)
   }
 
 // Метод добавления новой карточки
 
   addNewCardMethod(data) {
     return fetch(`${this._url}/cards`, {
-    method: 'PATCH',
+    method: 'POST',
     headers: this._headers,
     body: JSON.stringify({
       name: data.title,
-      link: data.link
+      link: data.link,
     })
   })
-      .them(this._checkResponseMethod)
+      .then(this._checkResponseMethod)
+
   }
 
 // Метод добавления лайка
@@ -81,7 +82,7 @@ export default class Api {
       authorization: this._authorization
       }
     })
-      .them(this._checkResponseMethod)
+      .then(this._checkResponseMethod)
   }
 
 
@@ -94,7 +95,7 @@ export default class Api {
         authorization: this._authorization
       }
     })
-      .them(this._checkResponseMethod)
+      .then(this._checkResponseMethod)
   }
 
 // Метод удаления карточки
@@ -106,7 +107,7 @@ export default class Api {
         authorization: this._authorization
       }
     })
-    .them(this._checkResponseMethod)
+      .then(this._checkResponseMethod)
   }
 
 }

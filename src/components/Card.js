@@ -62,7 +62,7 @@ export default class Card {
 // Метод изменения состояния счетчика
 
  counterStateMethod(likes) {
-    this._likeButtonCardElement.classList.add('card__like-button_active');
+    this._likeButtonCardElement.classList.toggle('card__like-button_active');
     this._likeCounterElement.textContent = likes.length;
  }
 
