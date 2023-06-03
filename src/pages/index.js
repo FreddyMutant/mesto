@@ -96,9 +96,9 @@ const profilePopup = new PopupWithForm(profilePopupSelector, (data) => {
 // Экземпляр для попапа добавления карточки
 
 const addCardPopup = new PopupWithForm(addCardPopupSelector, (data) => {
-  Promise.all([api.getInfoMethod(), api.addNewCardMethod(data)])
-    .then(([dataUser, dataCard]) => {
-      dataCard.myId = dataUser._id;
+  api.addNewCardMethod(data)
+    .then(dataCard => {
+      dataCard.myId = userInfo.getIdMethod();
       section.addItemPrependMethod(createNewCard(dataCard))
       addCardPopup.closePopupMethod()
     })
@@ -151,6 +151,7 @@ Promise.all([api.getInfoMethod(), api.getCardMethod()])
   .then(([dataUser, dataCard]) => {
     dataCard.forEach(element => element.myId = dataUser._id)
     userInfo.setUserInfoMethod({ username: dataUser.name, job: dataUser.about, avatar: dataUser.avatar });
+    userInfo.setIdMethod(dataUser._id);
     section.addCardFromArrayMethod(dataCard)
   })
   .catch((error) => console.error(`Ошибка создания начальных данных ${error}`))

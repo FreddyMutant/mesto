@@ -44,7 +44,9 @@ export default class Card {
 // Метод отображения кнопки удаления карточки
 
  _trashButtonCardElementVisibilityMethod() {
-    this._myId === this._ownerId ? this._trashButtonCardElement.style.display = 'block' : this._trashButtonCardElement.style.display = 'none';
+    if (this._myId !== this._ownerId) {
+      this._trashButtonCardElement.remove();
+    }
  }
 
 // Метод отображения лайков

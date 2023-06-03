@@ -20,4 +20,17 @@ export default class UserInfo {
     this._profileName.textContent = username;
     this._profileDescription.textContent = job;
   }
+
+// Метод получения Id
+
+  setIdMethod (id) {
+    this._id = id;
+  }
+
+// Метод возвращения Id
+
+  getIdMethod () {
+    return this._id;
+  }
+
 }
